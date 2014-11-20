@@ -1,0 +1,22 @@
+# ======================= #
+# Unreal Engine generated #
+# ======================= #
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
+*.sln
+
+# ======================= #
+# Visual Studio generated #
+# ======================= #
+*.opensdf
+*.sdf
+*.suo
+*.user
+
+# ============ #
+# OS generated #
+# ============ #
+Thumbs.db

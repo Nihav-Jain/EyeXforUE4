@@ -86,6 +86,6 @@ Contributors
 ------------
 Tim Lindeberg  
 The Tobii developer communications team  
-Temaran, who set the ball rolling  
+Fredrik Lindh (Temaran), who set the ball rolling  
 Special thanks to getnamo whose unofficial Hydra plugin has been very useful
 as a working example of plugin code.

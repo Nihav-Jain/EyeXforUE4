@@ -1,0 +1,27 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{4572DE8F-4EC0-55FF-082C-008CF2812A33}",
+	"Category": "",
+	"Description": "A collection of samples demonstrating the use of the EyeX Plugin for Unreal Engine 4.",
+	"Modules": [
+		{
+			"Name": "EyeXSamples",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "TobiiEyeX",
+			"Enabled": true
+		},
+		{
+			"Name": "OculusRift",
+			"Enabled": false
+		},
+		{
+			"Name": "Paper2D",
+			"Enabled": false
+		}
+	]
+}
