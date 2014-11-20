@@ -34,8 +34,8 @@ Getting started
    readme file in the UnrealEngine repository, but don't start the build just 
    yet.
 
-Alternatively, if you use an installed version of the Unreal Engine, you can skip 
-steps 1-3.
+   Alternatively, if you use an installed version of the Unreal Engine, you can skip 
+   steps 1-3.
 
 2. Optionally merge the pull request https://github.com/EpicGames/UnrealEngine/pull/582
    This removes the offset error that is present when the game starts. The 
@@ -84,8 +84,8 @@ Revision history
 
 Contributors
 ------------
-Tim Lindeberg
-The Tobii developer communications team
-Temaran, who set the ball rolling
-Special thanks to getnamo whose unofficial Hydra plugin has been very useful 
+Tim Lindeberg  
+The Tobii developer communications team  
+Temaran, who set the ball rolling  
+Special thanks to getnamo whose unofficial Hydra plugin has been very useful
 as a working example of plugin code.
