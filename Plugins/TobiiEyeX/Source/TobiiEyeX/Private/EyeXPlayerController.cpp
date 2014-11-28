@@ -8,6 +8,7 @@
 
 /*
  * Visualization functions for use during development.
+ * These functions are #defined to nothing in shipping builds.
  */
 #if !UE_BUILD_SHIPPING
 static void VisualizeGazePoint(bool bVisualizeDetection, UWorld *World, const FVector& Point)
