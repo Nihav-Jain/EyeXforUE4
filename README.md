@@ -57,7 +57,7 @@ Getting started
 
 7. To import the plugin into your own game project:
    - Create a new directory in your Unreal project directory called "Plugins".
-   - Copy the contents of the Plugins directory in this repo into that 
+   - Copy the contents of the Plugins directory in this repository into that
      directory.
    - Start the editor and open the plugin viewer (can be found in the 
      Windows->Plugins menu).
@@ -80,7 +80,7 @@ under the same terms as the rest of the source code in the repository.
 
 Revision history
 ----------------
-* 20 Nov 2014: First public release.
+* 4 Dec 2014: First public release.
 
 Contributors
 ------------
