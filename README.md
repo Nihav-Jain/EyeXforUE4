@@ -3,25 +3,18 @@ Tobii EyeX Plugin for Unreal Engine 4
 
 Overview
 --------
-The EyeX Plugin for Unreal Engine 4 makes it possible to create games that the
+The [Tobii EyeX](http://www.tobii.com/eyex) Plugin for [Unreal Engine 4](https://www.unrealengine.com) makes it possible to create games that the
 player can interact with using her eyes. It does that by integrating the Tobii
 EyeX Engine API into the Unreal Engine development environment.
 
 The plugin can be inserted into any game built with the Unreal Engine 4 and
 used from both Blueprints and C++ code.
 
-Contact
--------
-If you have problems, questions, ideas, or suggestions, please use the forums
-on the [Tobii Developer Zone](http://developer.tobii.com/). That's what they are for!
-
-Web site
---------
-This plugin is hosted on GitHub:
-[https://github.com/TobiiTechnology/EyeXforUE4](https://github.com/TobiiTechnology/EyeXforUE4)
-
-Visit the Tobii Developer Zone web site for the latest news and support:
-[http://developer.tobii.com/](http://developer.tobii.com/)
+Prerequisites
+-------------
+* A [Tobii EyeX Dev Kit](http://www.tobii.com/buy-eyex/) or other compatible Tobii eye tracker, such as the Tobii REX or Tobii X2-30.
+* [Unreal Engine](https://www.unrealengine.com) 4.5 or above.
+* Visual Studio 2013. Tested with Professional edition; we think it also should work fine with the free  [Visual Studio 2013 Express Windows Desktop edition](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop).
 
 Getting started
 ---------------
@@ -29,7 +22,7 @@ Getting started
    introduction: there's plenty of useful information in there and we don't
    want to repeat it here.
 
-2. Check out the `4.5` or `4.6` branch of `EpicGames/UnrealEngine`, or your fork of choice, 
+2. Check out the `4.5` or `4.6` branch of `EpicGames/UnrealEngine`, or your fork of choice,
    from GitHub. Download and install the required files as described in the
    readme file in the UnrealEngine repository, but don't start the build just
    yet.
@@ -70,6 +63,11 @@ Getting started
    IEyeXPlugin interface (C++).
 
 **HAVE FUN!!!**
+
+Contact
+-------
+If you have problems, questions, ideas, or suggestions, please use the forums
+on the [Tobii Developer Zone](http://developer.tobii.com/).
 
 Branches
 --------
