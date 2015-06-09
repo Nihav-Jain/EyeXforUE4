@@ -4,7 +4,7 @@
 #include "EyeXActorBase.h"
 #include "EyeXPlayerController.h" // for the EyeXPlayerController check
 
-AEyeXActorBase::AEyeXActorBase(const class FPostConstructInitializeProperties& PCIP)
+AEyeXActorBase::AEyeXActorBase(const class FObjectInitializer& PCIP)
 : Super(PCIP)
 {
 	AEyeXActorBase::StaticClass();

@@ -11,7 +11,7 @@ public:
 	static FViewport *GetViewport();
 
 	static FVector EyeX3DPointToUnrealWorld(FVector EyeX3DPoint);
-	static TEyeXMaybeValue<FVector2D> VirtualDesktopPixelToViewportPixel(FVector2D Point);
+	static TEyeXMaybeValue<FVector2D> VirtualDesktopPixelToViewportPixel(FVector2D Point, FEyeXScreenBounds ScreenBounds);
 	static FVector VirtualDesktopPixelToEyeX3DPoint(FVector2D VirtualDesktopPoint, FVector2D DisplaySizeMm, FEyeXScreenBounds ScreenBoundsPixels);
 
 	static int32 ECCArrayToBitField(const TArray<TEnumAsByte<ECollisionChannel> >& ChannelList);

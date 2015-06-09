@@ -238,9 +238,9 @@ struct TEyeXMaybeValue
 	/** Value, if bHasValue. Otherwise undefined. */
 	ValueType Value;
 
-	TEyeXMaybeValue<ValueType>::TEyeXMaybeValue(const ValueType& Value, bool bHasValue = true) :
-		Value(Value),
-		bHasValue(bHasValue)
+	TEyeXMaybeValue(const ValueType& Value, bool bHasValue = true) :
+		bHasValue(bHasValue),
+		Value(Value)
 	{}
 };
 

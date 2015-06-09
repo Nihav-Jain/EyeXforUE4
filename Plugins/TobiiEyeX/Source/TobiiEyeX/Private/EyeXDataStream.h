@@ -139,6 +139,6 @@ protected:
 
 private:
 
-	static char *Id;
+	static const char *Id;
 	FEyeXEyePosition Data;
 };

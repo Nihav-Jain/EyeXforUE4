@@ -44,7 +44,7 @@ static void VisualizeHit(bool bVisualizeDetection, UWorld *World, const FHitResu
 #endif
 
 
-AEyeXPlayerController::AEyeXPlayerController(const FPostConstructInitializeProperties& PCIP)
+AEyeXPlayerController::AEyeXPlayerController(const FObjectInitializer& PCIP)
 : Super(PCIP)
 {
 	AEyeXPlayerController::StaticClass();

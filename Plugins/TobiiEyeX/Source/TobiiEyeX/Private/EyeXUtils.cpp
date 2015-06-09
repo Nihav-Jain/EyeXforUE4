@@ -41,20 +41,29 @@ FVector FEyeXUtils::EyeX3DPointToUnrealWorld(FVector EyeX3DPoint)
 	return FVector(-0.1f * EyeX3DPoint.Z, 0.1f * EyeX3DPoint.X, 0.1f * EyeX3DPoint.Y);
 }
 
-TEyeXMaybeValue<FVector2D> FEyeXUtils::VirtualDesktopPixelToViewportPixel(FVector2D Point)
+TEyeXMaybeValue<FVector2D> FEyeXUtils::VirtualDesktopPixelToViewportPixel(FVector2D Point, FEyeXScreenBounds ScreenBounds)
 {
 	auto viewport = GetViewport();
 	if (viewport == nullptr)
 	{
 		return TEyeXMaybeValue<FVector2D>(FVector2D::ZeroVector, false);
 	}
+	
+	if (viewport->IsFullscreen())
+	{
+		auto viewportSize = viewport->GetSizeXY();
+		FVector2D viewportPixels((Point.X / ScreenBounds.Width) * viewportSize.X, (Point.Y / ScreenBounds.Height) * viewportSize.Y);
+		return TEyeXMaybeValue<FVector2D>(viewportPixels);
+	}
+	else
+	{
+		FIntPoint intPoint((int32)Point.X, (int32)Point.Y);
+		FVector2D viewportPoint = viewport->VirtualDesktopPixelToViewport(intPoint);
 
-	FIntPoint intPoint((int32)Point.X, (int32)Point.Y);
-	FVector2D viewportPoint = viewport->VirtualDesktopPixelToViewport(intPoint);
-
-	auto viewportSize = viewport->GetSizeXY();
-	FVector2D viewportPixels(viewportPoint.X * viewportSize.X, viewportPoint.Y * viewportSize.Y);
-	return TEyeXMaybeValue<FVector2D>(viewportPixels);
+		auto viewportSize = viewport->GetSizeXY();
+		FVector2D viewportPixels(viewportPoint.X * viewportSize.X, viewportPoint.Y * viewportSize.Y);
+		return TEyeXMaybeValue<FVector2D>(viewportPixels);
+	}
 }
 
 FVector FEyeXUtils::VirtualDesktopPixelToEyeX3DPoint(FVector2D VirtualDesktopPoint, FVector2D DisplaySizeMm, FEyeXScreenBounds ScreenBoundsPixels)
