@@ -2,12 +2,10 @@
 
 #include "EyeXPluginPrivatePCH.h"
 #include "EyeXActorBase.h"
-#include "EyeXPlayerController.h" // for the EyeXPlayerController check
 
-AEyeXActorBase::AEyeXActorBase(const class FPostConstructInitializeProperties& PCIP)
+AEyeXActorBase::AEyeXActorBase(const class FObjectInitializer& PCIP)
 : Super(PCIP)
 {
-	AEyeXActorBase::StaticClass();
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Default values
@@ -29,18 +27,6 @@ void AEyeXActorBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-#if !UE_BUILD_SHIPPING
-	if (!GetWorld())
-		return;
-
-	for (FConstPlayerControllerIterator Itr = GetWorld()->GetPlayerControllerIterator(); Itr; Itr++)
-	{
-		if (Cast<AEyeXPlayerController>(*Itr))
-			return;
-	}
-
-	UE_LOG(LogEyeX, Warning, TEXT("Scene does not contain an EyeXPlayerController! EyeXActorBase cannot be used without it!"));
-#endif
 }
 
 void AEyeXActorBase::Tick(float DeltaSeconds)
@@ -154,4 +140,14 @@ bool AEyeXActorBase::IsWithinDistance() const
 bool AEyeXActorBase::HasGazeFocus() const
 {
 	return bHasFocus;
+}
+
+void AEyeXActorBase::LostGazeFocus()
+{
+	LostGazeFocusBP();
+}
+
+void AEyeXActorBase::GotGazeFocus()
+{
+	GotGazeFocusBP();
 }

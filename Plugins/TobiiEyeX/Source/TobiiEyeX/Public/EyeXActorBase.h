@@ -57,14 +57,14 @@ public:
 	 * do anything.
 	 */
 	UFUNCTION(BlueprintImplementableEvent, Category = "EyeX")
-	virtual void GotGazeFocus();
+	void GotGazeFocusBP();
 
 	/**
 	 * Fires when this actor has lost the focus of the users gaze. Requires no super call when overriding since it doesn't
 	 * do anything.
 	 */
 	UFUNCTION(BlueprintImplementableEvent, Category = "EyeX")
-	virtual void LostGazeFocus();
+	void LostGazeFocusBP();
 
 	/**
 	 * Check to see if this actor is focused by the users gaze.
@@ -75,6 +75,9 @@ public:
 	
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
+
+	virtual void LostGazeFocus();
+	virtual	void GotGazeFocus();
 
 private:
 
