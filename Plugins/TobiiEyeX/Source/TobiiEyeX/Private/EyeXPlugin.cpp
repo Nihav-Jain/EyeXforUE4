@@ -155,9 +155,11 @@ FEyeXGazePoint FEyeXPlugin::GetGazePoint(EEyeXGazePointDataMode::Type Mode)
 
 	auto stream = GetOrCreateGazePointDataStream(Mode);
 	auto last = stream->Last();
-	if (last.bHasValue)
+	auto screenBounds = GetScreenBounds();
+
+	if (last.bHasValue && screenBounds.bHasValue)
 	{
-		auto viewportPoint = FEyeXUtils::VirtualDesktopPixelToViewportPixel(last.Value);
+		auto viewportPoint = FEyeXUtils::VirtualDesktopPixelToViewportPixel(last.Value, screenBounds.Value);
 		if (viewportPoint.bHasValue)
 		{
 			return FEyeXGazePoint(viewportPoint.Value, last.TimeStamp, true);
@@ -202,9 +204,11 @@ FEyeXFixationDataPoint FEyeXPlugin::GetOngoingFixation(EEyeXFixationDataMode::Ty
 
 FEyeXFixationDataPoint FEyeXPlugin::ConvertFixationPointToViewportPixels(FEyeXFixationDataPoint fixation)
 {
-	if (fixation.bHasValue)
+	auto screenBounds = GetScreenBounds();
+
+	if (fixation.bHasValue && screenBounds.bHasValue)
 	{
-		auto viewportPoint = FEyeXUtils::VirtualDesktopPixelToViewportPixel(fixation.GazePoint);
+		auto viewportPoint = FEyeXUtils::VirtualDesktopPixelToViewportPixel(fixation.GazePoint, screenBounds.Value);
 		if (viewportPoint.bHasValue)
 		{
 			return FEyeXFixationDataPoint(viewportPoint.Value, fixation.BeginTimeStamp, fixation.Duration, true);
