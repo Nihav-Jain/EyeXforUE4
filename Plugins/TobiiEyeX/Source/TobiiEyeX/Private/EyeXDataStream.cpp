@@ -3,7 +3,11 @@
 #include "EyeXPluginPrivatePCH.h"
 #include "EyeXDataStream.h"
 
+#if !PLATFORM_PS4
 #pragma warning(disable: 4996) // suppress warning: Function call with parameters that may be unsafe
+#else
+#define _snprintf snprintf
+#endif
 
 
 void FEyeXDataStream::AddToSnapshot(TX_HANDLE Snapshot, bool MarkAsDeleted) const
@@ -162,11 +166,12 @@ void FEyeXFixationDataStream::AddBehavior(TX_HANDLE Interactor) const
 //  Implementation of FEyeXEyePositionDataStream
 // -------------------------------------------------------------------
 
-char *FEyeXEyePositionDataStream::Id = "ds_eyeposition";
+#define DEFAULT_EYEPOSITION_ID "ds_eyeposition"
+const char *FEyeXEyePositionDataStream::Id = DEFAULT_EYEPOSITION_ID;
 
 void FEyeXEyePositionDataStream::GetInteractorId(char *buffer)
 {
-	_snprintf(buffer, MAX_DATA_STREAM_INTERACTOR_ID_SIZE, Id);
+	_snprintf(buffer, MAX_DATA_STREAM_INTERACTOR_ID_SIZE, DEFAULT_EYEPOSITION_ID);
 }
 
 FEyeXEyePositionDataStream::FEyeXEyePositionDataStream(FEyeXClientLibraryLoader& EyeXClient) :

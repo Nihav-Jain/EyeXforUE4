@@ -51,7 +51,7 @@ private:
 	void SendGlobalInteractorSnapshot(bool markAsDeleted = false);
 	void UpdateConnectionStateOnAllStateAccessors();
 
-	static FEyeXFixationDataPoint ConvertFixationPointToViewportPixels(FEyeXFixationDataPoint dataPointInVirtualDesktopPixels);
+	FEyeXFixationDataPoint ConvertFixationPointToViewportPixels(FEyeXFixationDataPoint dataPointInVirtualDesktopPixels);
 
 private:
 

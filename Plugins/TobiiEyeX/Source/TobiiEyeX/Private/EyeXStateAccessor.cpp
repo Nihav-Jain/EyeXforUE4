@@ -3,7 +3,9 @@
 #include "EyeXPluginPrivatePCH.h"
 #include "EyeXStateAccessor.h"
 
-
+#if PLATFORM_PS4
+template<>
+#endif
 void TEyeXStateAccessor<TX_SIZE2>::HandleStateChanged(TX_CONSTHANDLE AsyncData)
 {
 	FEyeXScopedHandle stateBag(EyeXClient);
@@ -14,6 +16,9 @@ void TEyeXStateAccessor<TX_SIZE2>::HandleStateChanged(TX_CONSTHANDLE AsyncData)
 	}
 }
 
+#if PLATFORM_PS4
+template<>
+#endif
 void TEyeXStateAccessor<TX_RECT>::HandleStateChanged(TX_CONSTHANDLE AsyncData)
 {
 	FEyeXScopedHandle stateBag(EyeXClient);
@@ -24,6 +29,9 @@ void TEyeXStateAccessor<TX_RECT>::HandleStateChanged(TX_CONSTHANDLE AsyncData)
 	}
 }
 
+#if PLATFORM_PS4
+template<>
+#endif
 void TEyeXStateAccessor<TX_INTEGER>::HandleStateChanged(TX_CONSTHANDLE AsyncData)
 {
 	FEyeXScopedHandle stateBag(EyeXClient);
