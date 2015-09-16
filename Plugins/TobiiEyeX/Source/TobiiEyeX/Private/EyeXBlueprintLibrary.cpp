@@ -5,8 +5,8 @@
 
 IEyeXPlugin* UEyeXBlueprintLibrary::EyeX;
 
-UEyeXBlueprintLibrary::UEyeXBlueprintLibrary(const class FPostConstructInitializeProperties& PCIP)
-: Super(PCIP)
+UEyeXBlueprintLibrary::UEyeXBlueprintLibrary(const class FObjectInitializer& ObjectInitializer)
+: Super(ObjectInitializer)
 {
 }
 
