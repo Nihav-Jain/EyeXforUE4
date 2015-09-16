@@ -14,7 +14,7 @@ used from both Blueprints and C++ code.
 Prerequisites
 -------------
 * A [Tobii EyeX Dev Kit](http://www.tobii.com/buy-eyex/) or other compatible Tobii eye tracker, such as the Tobii REX or Tobii X2-30.
-* [Unreal Engine](https://www.unrealengine.com) 4.6.
+* [Unreal Engine](https://www.unrealengine.com) 4.7.
 * Visual Studio 2013. Tested with Professional edition; we think it also should work fine with the free  [Visual Studio 2013 Express Windows Desktop edition](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop).
 
 Getting started
@@ -23,21 +23,19 @@ Getting started
    introduction: there's plenty of useful information in there and we don't
    want to repeat it here.
 
-2. Install the 4.6 version of Unreal Engine.
-
-3. Clone or download this repository from GitHub.
+2. Clone or download this repository from GitHub.
    Download the EyeX SDK for C/C++ from developer.tobii.com. Extract the files
    and copy the lib and include directories to
    `Plugins/TobiiEyeX/ThirdParty/EyeX`.
    Note that the SDK license differs from the one used for this plugin.
 
-4. Locate the `EyeXSamples.uproject` file in the EyeX Plugin package. Right-
-   click and select "Switch Unreal Engine version..." and "4.6" in the dropdown
+3. Locate the `EyeXSamples.uproject` file in the EyeX Plugin package. Right-
+   click and select "Switch Unreal Engine version..." and "4.7" in the dropdown
    menu. Open the Visual Studio solution file that appears. Build and run the 
    sample project (EyeXSamples). The EyeXSamples editor should launch. Click 
    play to start the samples.
 
-6. To import the plugin into your own game project:
+4. To import the plugin into your own game project:
    - Create a new directory in your Unreal project directory called "Plugins".
    - Copy the contents of the Plugins directory in this repository into that
      directory.
@@ -48,7 +46,7 @@ Getting started
      `PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject",
      "Engine", "InputCore", "TobiiEyeX" });`
 
-7. Use the plugin through the EyeX function library (Blueprints) and/or the
+5. Use the plugin through the EyeX function library (Blueprints) and/or the
    IEyeXPlugin interface (C++).
 
 **HAVE FUN!!!**
@@ -79,6 +77,7 @@ under the same terms as the rest of the source code in the repository.
 Revision history
 ----------------
 * 4 Dec 2014: First public release.
+* 19 Sep 2015: Support for UE4.6-4.7
 
 Contributors
 ------------

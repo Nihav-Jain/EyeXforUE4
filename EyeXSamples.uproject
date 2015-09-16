@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.6",
+	"EngineAssociation": "4.7",
 	"Category": "",
 	"Description": "A collection of samples demonstrating the use of the EyeX Plugin for Unreal Engine 4.",
 	"Modules": [
