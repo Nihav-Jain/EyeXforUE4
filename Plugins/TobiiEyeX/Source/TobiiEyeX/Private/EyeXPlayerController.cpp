@@ -44,8 +44,8 @@ static void VisualizeHit(bool bVisualizeDetection, UWorld *World, const FHitResu
 #endif
 
 
-AEyeXPlayerController::AEyeXPlayerController(const FPostConstructInitializeProperties& PCIP)
-: Super(PCIP)
+AEyeXPlayerController::AEyeXPlayerController(const class FObjectInitializer& ObjectInitializer)
+: Super(ObjectInitializer)
 {
 	AEyeXPlayerController::StaticClass();
 	PrimaryActorTick.bCanEverTick = true;

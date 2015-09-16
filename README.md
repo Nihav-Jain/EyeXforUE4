@@ -3,9 +3,10 @@ Tobii EyeX Plugin for Unreal Engine 4
 
 Overview
 --------
-The [Tobii EyeX](http://www.tobii.com/eyex) Plugin for [Unreal Engine 4](https://www.unrealengine.com) makes it possible to create games that the
-player can interact with using her eyes. It does that by integrating the Tobii
-EyeX Engine API into the Unreal Engine development environment.
+The [Tobii EyeX](http://www.tobii.com/eyex) Plugin for [Unreal Engine 4](https://www.unrealengine.com) 
+makes it possible to create games that the player can interact with using her 
+eyes. It does that by integrating the Tobii EyeX Engine API into the Unreal 
+Engine development environment.
 
 The plugin can be inserted into any game built with the Unreal Engine 4 and
 used from both Blueprints and C++ code.
@@ -13,7 +14,7 @@ used from both Blueprints and C++ code.
 Prerequisites
 -------------
 * A [Tobii EyeX Dev Kit](http://www.tobii.com/buy-eyex/) or other compatible Tobii eye tracker, such as the Tobii REX or Tobii X2-30.
-* [Unreal Engine](https://www.unrealengine.com) 4.5 or above.
+* [Unreal Engine](https://www.unrealengine.com) 4.6.
 * Visual Studio 2013. Tested with Professional edition; we think it also should work fine with the free  [Visual Studio 2013 Express Windows Desktop edition](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop).
 
 Getting started
@@ -22,33 +23,21 @@ Getting started
    introduction: there's plenty of useful information in there and we don't
    want to repeat it here.
 
-2. Check out the `4.5` or `4.6` branch of `EpicGames/UnrealEngine`, or your fork of choice,
-   from GitHub. Download and install the required files as described in the
-   readme file in the UnrealEngine repository, but don't start the build just
-   yet.
+2. Install the 4.6 version of Unreal Engine.
 
-   Alternatively, if you use an installed version of the Unreal Engine, you can skip
-   steps 2-4.
-
-3. Optionally merge the pull request [https://github.com/EpicGames/UnrealEngine/pull/582](https://github.com/EpicGames/UnrealEngine/pull/582).  
-   This removes the offset error that is present when the game starts. The
-   workaround is to move the mouse pointer over the viewport.
-
-4. Build the Unreal Engine as described in its readme file.
-
-5. Clone or download this repository from GitHub.
+3. Clone or download this repository from GitHub.
    Download the EyeX SDK for C/C++ from developer.tobii.com. Extract the files
    and copy the lib and include directories to
    `Plugins/TobiiEyeX/ThirdParty/EyeX`.
    Note that the SDK license differs from the one used for this plugin.
 
-6. Locate the `EyeXSamples.uproject` file in the EyeX Plugin package. Right-
-   click and select Generate Visual Studio project files. Open the Visual
-   Studio solution file that appears. Build and run the sample project
-   (EyeXSamples). The EyeXSamples editor should launch. Click play to start
-   the samples.
+4. Locate the `EyeXSamples.uproject` file in the EyeX Plugin package. Right-
+   click and select "Switch Unreal Engine version..." and "4.6" in the dropdown
+   menu. Open the Visual Studio solution file that appears. Build and run the 
+   sample project (EyeXSamples). The EyeXSamples editor should launch. Click 
+   play to start the samples.
 
-7. To import the plugin into your own game project:
+6. To import the plugin into your own game project:
    - Create a new directory in your Unreal project directory called "Plugins".
    - Copy the contents of the Plugins directory in this repository into that
      directory.
@@ -59,10 +48,14 @@ Getting started
      `PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject",
      "Engine", "InputCore", "TobiiEyeX" });`
 
-8. Use the plugin through the EyeX function library (Blueprints) and/or the
+7. Use the plugin through the EyeX function library (Blueprints) and/or the
    IEyeXPlugin interface (C++).
 
 **HAVE FUN!!!**
+
+Known issues
+------------
+* There might be an offset error when the game starts. The workaround is to move the mouse pointer over the viewport.
 
 Contact
 -------
@@ -71,7 +64,10 @@ on the [Tobii Developer Zone](http://developer.tobii.com/).
 
 Branches
 --------
-The master branch has been tested against Unreal Engine 4.5 and 4.6. More branches will be added later on.
+Use the branches with the naming format "v/4.X". They have been tested and 
+should work with Unreal Engine version 4.X.
+The state and compatibility of the master branch is undefined. 
+Branches are added from time to time to work with newer UE4 versions.
 
 Contributing
 ------------
