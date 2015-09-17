@@ -3,6 +3,7 @@
 #pragma once
 
 #include "IEyeXPlugin.h"
+#include "EyeXTypes.h"
 #include "EyeXPlayerController.generated.h"
 
 class AEyeXActorBase;
@@ -135,14 +136,14 @@ public:
 private:
 
 	AEyeXActorBase* FindFocusedActor(FHitResult& OutHit, const FVector2D& GazePoint);
-	AEyeXActorBase* FindByLineTrace(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint, const FCollisionQueryParams& TraceParams,
-		const FCollisionObjectQueryParams& ObjectParams);
-	AEyeXActorBase* FindByBoxedLineTrace(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint, const FCollisionQueryParams& TraceParams,
-		const FCollisionObjectQueryParams& ObjectParams);
-	AEyeXActorBase* FindBySweep(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint, const FCollisionQueryParams& TraceParams,
-		const FCollisionObjectQueryParams& ObjectParams);
-	AEyeXActorBase* FindByFrustumIntersection(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint, const FCollisionQueryParams& TraceParams,
-		const FCollisionObjectQueryParams& ObjectParams);
+	AEyeXActorBase* FindByLineTrace(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint, const FCollisionObjectQueryParams& ObjectParams,
+		const FCollisionQueryParams& TraceParams);
+	AEyeXActorBase* FindByBoxedLineTrace(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint, const FCollisionObjectQueryParams& ObjectParams, 
+		const FCollisionQueryParams& TraceParams);
+	AEyeXActorBase* FindBySweep(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint, const FCollisionObjectQueryParams& ObjectParams,
+		const FCollisionQueryParams& TraceParams);
+	AEyeXActorBase* FindByFrustumIntersection(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint, const FCollisionObjectQueryParams& ObjectParams,
+		const FCollisionQueryParams& TraceParams);
 
 	// Used with sweep
 	float GetTanOfFOVAngleScaled() const;

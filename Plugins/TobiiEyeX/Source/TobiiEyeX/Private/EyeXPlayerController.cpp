@@ -156,24 +156,24 @@ AEyeXActorBase* AEyeXPlayerController::FindFocusedActor(FHitResult& OutHit, cons
 	FSceneView* View = LocalPlayer->CalcSceneView(&ViewFamily, /*out*/ ViewLocation, /*out*/ ViewRotation, LocalPlayer->ViewportClient->Viewport);
 
 	// Initiate sweep/trace variables
-	const FCollisionQueryParams TraceParams(FName(TEXT("GazeTrace")), true, GetPawn());
 	const FCollisionObjectQueryParams ObjectParams(FEyeXUtils::ECCArrayToBitField(CollisionChannels));
+	const FCollisionQueryParams TraceParams(FName(TEXT("GazeTrace")), true, GetPawn());
 	FHitResult HitResult;
 	AEyeXActorBase* EyeXActor = nullptr;
 
 	switch (DetectionMode)
 	{
 	case EEyeXDetectionMode::LineTrace:
-		EyeXActor = FindByLineTrace(HitResult, View, GazePoint, TraceParams, ObjectParams);
+		EyeXActor = FindByLineTrace(HitResult, View, GazePoint, ObjectParams, TraceParams);
 		break;
 	case EEyeXDetectionMode::BoxedLineTrace:
-		EyeXActor = FindByBoxedLineTrace(HitResult, View, GazePoint, TraceParams, ObjectParams);
+		EyeXActor = FindByBoxedLineTrace(HitResult, View, GazePoint, ObjectParams, TraceParams);
 		break;
 	case EEyeXDetectionMode::Sweep:
-		EyeXActor = FindBySweep(HitResult, View, GazePoint, TraceParams, ObjectParams);
+		EyeXActor = FindBySweep(HitResult, View, GazePoint, ObjectParams, TraceParams);
 		break;
 	case EEyeXDetectionMode::FrustrumIntersection:
-		EyeXActor = FindByFrustumIntersection(HitResult, View, GazePoint, TraceParams, ObjectParams);
+		EyeXActor = FindByFrustumIntersection(HitResult, View, GazePoint, ObjectParams, TraceParams);
 		break;
 	default:
 		break;
@@ -183,8 +183,8 @@ AEyeXActorBase* AEyeXPlayerController::FindFocusedActor(FHitResult& OutHit, cons
 	return EyeXActor; // use out param for actor as well, alternatively use hit actor in hit result (with cast). make the method const too.
 }
 
-AEyeXActorBase* AEyeXPlayerController::FindByLineTrace(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint,
-	const FCollisionQueryParams& TraceParams, const FCollisionObjectQueryParams& ObjectParams)
+AEyeXActorBase* AEyeXPlayerController::FindByLineTrace(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint, 
+	const FCollisionObjectQueryParams& ObjectParams, const FCollisionQueryParams& TraceParams)
 {
 	UWorld* World = GetWorld();
 	if (!World) return nullptr;
@@ -192,7 +192,7 @@ AEyeXActorBase* AEyeXPlayerController::FindByLineTrace(FHitResult& OutHit, const
 	AEyeXActorBase* EyeXActor = nullptr;
 	FVector Start, End;
 	FEyeXUtils::GetStartAndEndOfLineTrace(View, MaxDistance, GazePoint, /*out*/ Start, /*out*/ End);
-	if (World->LineTraceSingle(OutHit, Start, End, TraceParams, ObjectParams))
+	if (World->LineTraceSingleByObjectType(OutHit, Start, End, ObjectParams, TraceParams))
 	{
 		EyeXActor = Cast<AEyeXActorBase>(OutHit.GetActor());
 	}
@@ -204,7 +204,7 @@ AEyeXActorBase* AEyeXPlayerController::FindByLineTrace(FHitResult& OutHit, const
 }
 
 AEyeXActorBase* AEyeXPlayerController::FindByBoxedLineTrace(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint,
-	const FCollisionQueryParams& TraceParams, const FCollisionObjectQueryParams& ObjectParams)
+	const FCollisionObjectQueryParams& ObjectParams, const FCollisionQueryParams& TraceParams)
 {
 	UWorld* World = GetWorld();
 	if (!World) return nullptr;
@@ -217,7 +217,7 @@ AEyeXActorBase* AEyeXPlayerController::FindByBoxedLineTrace(FHitResult& OutHit, 
 	AEyeXActorBase* EyeXActor = nullptr;
 	FVector Start, End;
 	FEyeXUtils::GetStartAndEndOfLineTrace(View, MaxDistance, GazePoint, /*out*/ Start, /*out*/ End);
-	if (World->LineTraceSingle(OutHit, Start, End, TraceParams, ObjectParams))
+	if (World->LineTraceSingleByObjectType(OutHit, Start, End, ObjectParams, TraceParams))
 	{
 		EyeXActor = Cast<AEyeXActorBase>(OutHit.GetActor());
 	}
@@ -230,7 +230,7 @@ AEyeXActorBase* AEyeXPlayerController::FindByBoxedLineTrace(FHitResult& OutHit, 
 		{
 			FVector BoxStart, BoxEnd;
 			FEyeXUtils::GetStartAndEndOfLineTrace(View, MaxDistance, Corners[i], /*out*/ BoxStart, /*out*/ BoxEnd);
-			if (World->LineTraceSingle(OutHit, BoxStart, BoxEnd, TraceParams, ObjectParams))
+			if (World->LineTraceSingleByObjectType(OutHit, BoxStart, BoxEnd, ObjectParams, TraceParams))
 			{
 				AEyeXActorBase* Actor = Cast<AEyeXActorBase>(OutHit.GetActor());
 				if (!Actor) continue;
@@ -255,7 +255,7 @@ AEyeXActorBase* AEyeXPlayerController::FindByBoxedLineTrace(FHitResult& OutHit, 
 }
 
 AEyeXActorBase* AEyeXPlayerController::FindBySweep(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint,
-	const FCollisionQueryParams& TraceParams, const FCollisionObjectQueryParams& ObjectParams)
+	const FCollisionObjectQueryParams& ObjectParams, const FCollisionQueryParams& TraceParams)
 {
 	if (SweepIntervals <= 1)
 	{
@@ -283,7 +283,7 @@ AEyeXActorBase* AEyeXPlayerController::FindBySweep(FHitResult& OutHit, const FSc
 		const float Radius = (i == 0) ? 0.0f : TanFOVScaled * CurrentDistance; // Depends on the view frustrum, size of the screen and the distance.
 		Shape.SetSphere(Radius);
 
-		if (World->SweepSingle(OutHit, Start, End, FQuat::Identity, Shape, TraceParams, ObjectParams))
+		if (World->SweepSingleByObjectType(OutHit, Start, End, FQuat::Identity, ObjectParams, Shape, TraceParams))
 		{
 			EyeXActor = Cast<AEyeXActorBase>(OutHit.GetActor());
 			break;
@@ -300,7 +300,7 @@ AEyeXActorBase* AEyeXPlayerController::FindBySweep(FHitResult& OutHit, const FSc
 }
 
 AEyeXActorBase* AEyeXPlayerController::FindByFrustumIntersection(FHitResult& OutHit, const FSceneView* const View, const FVector2D& GazePoint,
-	const FCollisionQueryParams& TraceParams, const FCollisionObjectQueryParams& ObjectParams)
+	const FCollisionObjectQueryParams& ObjectParams, const FCollisionQueryParams& TraceParams)
 {
 	UWorld* World = GetWorld();
 	if (!World) return nullptr;
@@ -314,7 +314,7 @@ AEyeXActorBase* AEyeXPlayerController::FindByFrustumIntersection(FHitResult& Out
 	FEyeXUtils::GetStartAndEndOfLineTrace(View, MaxDistance, GazePoint, /*out*/ Start, /*out*/ End);
 
 	AEyeXActorBase* EyeXActor = nullptr;
-	if (World->LineTraceSingle(OutHit, Start, End, TraceParams, ObjectParams))
+	if (World->LineTraceSingleByObjectType(OutHit, Start, End, ObjectParams, TraceParams))
 	{
 		EyeXActor = Cast<AEyeXActorBase>(OutHit.GetActor());
 	}
