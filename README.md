@@ -53,10 +53,6 @@ Getting started
 
 **HAVE FUN!!!**
 
-Known issues
-------------
-* There might be an offset error when the game starts. The workaround is to move the mouse pointer over the viewport.
-
 Contact
 -------
 If you have problems, questions, ideas, or suggestions, please use the forums
