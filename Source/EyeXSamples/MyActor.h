@@ -10,9 +10,10 @@
 UCLASS()
 class EYEXSAMPLES_API AMyActor : public AEyeXActorBase
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
 
 public:
+	AMyActor(const FObjectInitializer& ObjectInitializer);
 
 	virtual void GotGazeFocus() override;
 	virtual void LostGazeFocus() override;
