@@ -14,7 +14,7 @@ used from both Blueprints and C++ code.
 Prerequisites
 -------------
 * A [Tobii EyeX Dev Kit](http://www.tobii.com/buy-eyex/) or other compatible Tobii eye tracker, such as the Tobii REX or Tobii X2-30.
-* [Unreal Engine](https://www.unrealengine.com) 4.5/4.6/4.7/4.8.
+* [Unreal Engine](https://www.unrealengine.com) 4.5/4.6/4.7/4.8/4.9.
 * Visual Studio 2013. Tested with Professional edition; we think it also should work fine with the free  [Visual Studio 2013 Express Windows Desktop edition](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop).
 
 Getting started
@@ -80,7 +80,7 @@ Revision history
 ----------------
 * 4 Dec 2014: First public release.
 * 19 Sep 2015: Support for UE4.6 and 4.7
-* 20 Sep 2015: Support for UE4.8
+* 20 Sep 2015: Support for UE4.8 and 4.9
 
 Contributors
 ------------

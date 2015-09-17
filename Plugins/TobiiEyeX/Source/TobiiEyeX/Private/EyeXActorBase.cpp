@@ -41,6 +41,7 @@ void AEyeXActorBase::BeginPlay()
 
 	UE_LOG(LogEyeX, Warning, TEXT("Scene does not contain an EyeXPlayerController! EyeXActorBase cannot be used without it!"));
 #endif
+
 }
 
 void AEyeXActorBase::Tick(float DeltaSeconds)
@@ -154,4 +155,14 @@ bool AEyeXActorBase::IsWithinDistance() const
 bool AEyeXActorBase::HasGazeFocus() const
 {
 	return bHasFocus;
+}
+
+void AEyeXActorBase::LostGazeFocus()
+{
+	LostGazeFocusBP();
+}
+
+void AEyeXActorBase::GotGazeFocus()
+{
+	GotGazeFocusBP();
 }

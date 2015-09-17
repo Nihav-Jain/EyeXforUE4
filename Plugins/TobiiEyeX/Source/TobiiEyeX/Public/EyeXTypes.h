@@ -256,3 +256,29 @@ namespace EEyeXEmulationMode
 		Enabled			UMETA(DisplayName = "Enabled")
 	};
 }
+
+struct FMyInteractor
+{
+	int32 X;
+	int32 Y;
+	uint32 Z;
+
+	uint32 Width;
+	uint32 Height;
+
+	uint32 Id;
+};
+
+struct FMyBitmask
+{
+	uint32 NrRows;
+	uint32 NrColumns;
+
+	TArray<uint8> Data;
+};
+
+struct FMyMaskInteractor
+{
+	FMyInteractor Interactor;
+	FMyBitmask Bitmask;
+};
