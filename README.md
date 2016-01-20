@@ -28,7 +28,7 @@ Getting started
      or download this repository from GitHub.)
    - Download the EyeX SDK for C/C++ from [developer.tobii.com](http://developer.tobii.com/downloads). 
    - Extract the EyeX SDK files and copy the lib and include directories to the
-     `Plugins/TobiiEyeX/ThirdParty/EyeX` folder of the EyeZ plugin. (Note that 
+     `Plugins/TobiiEyeX/ThirdParty/EyeX` folder of the EyeX plugin. (Note that 
 	 the SDK license differs from the one used for this plugin.)
 
 3. Locate the `EyeXSamples.uproject` file in the EyeX Plugin package. Right-
