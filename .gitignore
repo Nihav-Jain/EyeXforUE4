@@ -15,6 +15,7 @@ Build/
 *.sdf
 *.suo
 *.user
+*.VC.opendb
 
 # ============ #
 # OS generated #
