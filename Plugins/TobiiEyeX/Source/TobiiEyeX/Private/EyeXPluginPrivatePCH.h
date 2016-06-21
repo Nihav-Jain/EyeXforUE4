@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Engine.h"
+#include "Runtime/Engine/Classes/AI/Navigation/NavLinkRenderingComponent.h"
 #include "IEyeXPlugin.h"
 #include "EyeXTypes.h"
 
