@@ -94,78 +94,9 @@ bool FEyeXMathHelpers::IntersectsFrustum(FHitResult& HitOut, AActor* InActor, co
 					InitHitResult(HitOut, InActor, PrimitiveComponent, FVector::ZeroVector, FVector::ZeroVector, 0);
 					return true;
 				}
-				if (IntersectsVertices(HitOut, InActor, PrimitiveComponent, InFrustum))
-				{
-					return true;
-				}
 			}
 		}
 	}
-	return false;
-}
-
-bool FEyeXMathHelpers::IntersectsVertices(FHitResult& HitOut, AActor* InActor, UPrimitiveComponent* InComponent, const FConvexVolume& InFrustum)
-{
-	UStaticMeshComponent* StaticMeshComponent = Cast<UStaticMeshComponent>(InComponent);
-	USkeletalMeshComponent* SkeletalMeshComponent = Cast<USkeletalMeshComponent>(InComponent);
-
-	if (StaticMeshComponent && StaticMeshComponent->StaticMesh)
-	{
-		check(StaticMeshComponent->StaticMesh->RenderData);
-		if (StaticMeshComponent->StaticMesh->RenderData->LODResources.Num() > 0)
-		{
-			const FStaticMeshLODResources& LODModel = StaticMeshComponent->StaticMesh->RenderData->LODResources[0];
-			uint32 NumVertices = LODModel.VertexBuffer.GetNumVertices();
-			for (uint32 VertexIndex = 0; VertexIndex < NumVertices; ++VertexIndex)
-			{
-				const FVector& LocalPosition = LODModel.PositionVertexBuffer.VertexPosition(VertexIndex);
-				const FVector& WorldPosition = StaticMeshComponent->ComponentToWorld.TransformPosition(LocalPosition);
-				if (InFrustum.IntersectBox(WorldPosition, FVector::ZeroVector))
-				{
-					//FVector Normal = LODModel.VertexBuffer.VertexTangentZ(VertexIndex);
-					InitHitResult(HitOut, InActor, InComponent, WorldPosition, FVector::ZeroVector, VertexIndex);
-					return true;
-				}
-			}
-		}
-	}
-	else if (SkeletalMeshComponent && SkeletalMeshComponent->MeshObject)
-	{
-		FSkeletalMeshResource* SkelMeshResource = SkeletalMeshComponent->GetSkeletalMeshResource();
-		check(SkelMeshResource);
-		check(SkelMeshResource->LODModels.Num() > 0);
-
-		const FStaticLODModel& LODModel = SkelMeshResource->LODModels[0];
-		for (int32 ChunkIndex = 0; ChunkIndex < LODModel.Chunks.Num(); ++ChunkIndex)
-		{
-			const FSkelMeshChunk& Chunk = LODModel.Chunks[ChunkIndex];
-			for (int32 VertexIndex = 0; VertexIndex < Chunk.RigidVertices.Num(); ++VertexIndex)
-			{
-				FRigidSkinVertex Vertex = Chunk.RigidVertices[VertexIndex];
-				const FVector Location = SkeletalMeshComponent->ComponentToWorld.TransformPosition(Vertex.Position);
-				if (InFrustum.IntersectBox(Location, FVector::ZeroVector))
-				{
-					FName BoneName = SkeletalMeshComponent->GetBoneName(Vertex.Bone);
-					//FVector Normal = Vertex.TangentZ;
-					InitHitResult(HitOut, InActor, InComponent, Location, FVector::ZeroVector, VertexIndex, BoneName);
-					return true;
-				}
-			}
-
-			for (int32 VertexIndex = 0; VertexIndex < Chunk.SoftVertices.Num(); ++VertexIndex)
-			{
-				FSoftSkinVertex Vertex = Chunk.SoftVertices[VertexIndex];
-				const FVector Location = SkeletalMeshComponent->ComponentToWorld.TransformPosition(Vertex.Position);
-				if (InFrustum.IntersectBox(Location, FVector::ZeroVector))
-				{
-					//FVector Normal = Vertex.TangentZ;
-					InitHitResult(HitOut, InActor, InComponent, Location, FVector::ZeroVector, VertexIndex);
-					return true;
-				}
-			}
-		}
-	}
-
 	return false;
 }
 

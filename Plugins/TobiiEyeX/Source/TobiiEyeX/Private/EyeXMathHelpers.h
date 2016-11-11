@@ -14,7 +14,6 @@ public:
 
 	static void CalculateFrustum(FVector2D Corners[], const FSceneView* const View, FConvexVolume& OutFrustum);
 	static bool IntersectsFrustum(FHitResult& HitOut, AActor* InActor, const FConvexVolume& InFrustum);
-	static bool IntersectsVertices(FHitResult& HitOut, AActor* InActor, UPrimitiveComponent* InComponent, const FConvexVolume& InFrustum);
 
 private:
 
