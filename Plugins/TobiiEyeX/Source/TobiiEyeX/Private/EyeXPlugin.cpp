@@ -31,6 +31,7 @@ void FEyeXPlugin::StartupModule()
 	Context = TX_EMPTY_HANDLE;
 	bIsConnected = false;
 	EmulationMode = EEyeXEmulationMode::Disabled;
+	EmulationPointType = EEyeXEmulationPoint::MousePosition;
 
 	ALL_STATE_ACCESSORS;
 	for (int i = 0; i < STATE_ACCESSOR_COUNT; i++)
@@ -148,9 +149,17 @@ FEyeXGazePoint FEyeXPlugin::GetGazePoint(EEyeXGazePointDataMode::Type Mode)
 			return FEyeXGazePoint::Invalid();
 		}
 
-		FVector2D mousePosition;
-		gameViewport->GetMousePosition(mousePosition);
-		return FEyeXGazePoint(mousePosition, 0, true);
+		FVector2D emulatedGazePoint;
+		if (EmulationPointType == EEyeXEmulationPoint::MousePosition)
+		{
+			gameViewport->GetMousePosition(emulatedGazePoint);
+		}
+		else if (EmulationPointType == EEyeXEmulationPoint::ViewportCenter)
+		{
+			gameViewport->GetViewportSize(emulatedGazePoint);
+			emulatedGazePoint /= 2;
+		}
+		return FEyeXGazePoint(emulatedGazePoint, 0, true);
 	}
 
 	auto stream = GetOrCreateGazePointDataStream(Mode);
@@ -338,6 +347,16 @@ EEyeXEmulationMode::Type FEyeXPlugin::GetEmulationMode()
 void FEyeXPlugin::SetEmulationMode(EEyeXEmulationMode::Type Mode)
 {
 	EmulationMode = Mode;
+}
+
+EEyeXEmulationPoint::Type FEyeXPlugin::GetEmulationPointType() const
+{
+	return EmulationPointType;
+}
+
+void FEyeXPlugin::SetEmulationPointType(EEyeXEmulationPoint::Type PointType)
+{
+	EmulationPointType = PointType;
 }
 
 void FEyeXPlugin::OnConnectionStateChanged(TX_CONNECTIONSTATE ConnectionState)

@@ -160,6 +160,22 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "EyeX")
 	static void SetEmulationMode(TEnumAsByte<EEyeXEmulationMode::Type> Mode);
 
+	/**
+	 * Gets the current emulation point type. The default is mouse position.
+	 *
+	 * @return emulation point type.
+	 */
+	UFUNCTION(BlueprintPure, Category = "EyeX")
+	static TEnumAsByte<EEyeXEmulationPoint::Type> GetEmulationPointType();
+
+	/**
+	 * Sets the emulation point for the eye-gaze point. The default is mouse position.
+	 *
+	 * @param PointType - emulation point type.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "EyeX")
+	static void SetEmulationPointType(TEnumAsByte<EEyeXEmulationPoint::Type> PointType);
+
 private:
 
 	static bool IsEyeXModuleAvailable();

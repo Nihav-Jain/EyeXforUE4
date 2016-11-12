@@ -151,4 +151,17 @@ public:
 	 */
 	virtual void SetEmulationMode(EEyeXEmulationMode::Type Mode) = 0;
 
+	/**
+	 * Gets the current emulation point type. The default is mouse position.
+	 *
+	 * @return emulation point type.
+	 */
+	virtual EEyeXEmulationPoint::Type GetEmulationPointType() const = 0;
+
+	/**
+	 * Sets the emulation point for the eye-gaze point. The default is mouse position.
+	 *
+	 * @param PointType - emulation point type.
+	 */
+	virtual void SetEmulationPointType(EEyeXEmulationPoint::Type PointType) = 0;
 };

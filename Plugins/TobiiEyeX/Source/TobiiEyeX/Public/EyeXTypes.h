@@ -245,7 +245,7 @@ struct TEyeXMaybeValue
 };
 
 /**
-* Describes the available modes for mouse emulation of the gaze point.
+* Describes the available modes for emulation of the gaze point.
 */
 UENUM(BlueprintType)
 namespace EEyeXEmulationMode
@@ -254,6 +254,19 @@ namespace EEyeXEmulationMode
 	{
 		Disabled		UMETA(DisplayName = "Disabled"),
 		Enabled			UMETA(DisplayName = "Enabled")
+	};
+}
+
+/**
+ * Describes the available points for emulation of the gaze point.
+ */
+UENUM(BlueprintType)
+namespace EEyeXEmulationPoint
+{
+	enum Type
+	{
+		MousePosition			UMETA(DisplayName = "MousePosition"),
+		ViewportCenter		UMETA(DisplayName = "ViewportCenter")
 	};
 }
 

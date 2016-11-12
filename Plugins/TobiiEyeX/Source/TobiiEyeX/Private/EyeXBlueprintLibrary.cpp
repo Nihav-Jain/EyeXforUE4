@@ -107,6 +107,24 @@ void UEyeXBlueprintLibrary::SetEmulationMode(TEnumAsByte<EEyeXEmulationMode::Typ
 	}
 }
 
+TEnumAsByte<EEyeXEmulationPoint::Type> UEyeXBlueprintLibrary::GetEmulationPointType()
+{
+	if (IsEyeXModuleAvailable())
+	{
+		return EyeX->GetEmulationPointType();
+	}
+
+	return EEyeXEmulationPoint::MousePosition;
+}
+
+void UEyeXBlueprintLibrary::SetEmulationPointType(TEnumAsByte<EEyeXEmulationPoint::Type> PointType)
+{
+	if (IsEyeXModuleAvailable())
+	{
+		EyeX->SetEmulationPointType(PointType);
+	}
+}
+
 bool UEyeXBlueprintLibrary::IsEyeXModuleAvailable()
 {
 	static bool bIsModuleInitialized = false;

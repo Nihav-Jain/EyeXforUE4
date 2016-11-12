@@ -105,12 +105,17 @@ void AEyeXPlayerController::Tick(float DeltaSeconds)
 		return;
 	}
 
-	if (MinUpdateDistance > 0 &&
-		LastUsedGazePoint.bHasValue &&
-		DistanceInMM(GazePoint.Value, LastUsedGazePoint.Value, 1 / GetApproximatePixelsPerMillimeter()) < MinUpdateDistance)
+	// If the emulation mode is enabled and the emulation point is the center of the viewport, don't perform minimum update distance check.
+	// This is because this check will always fail in this case since the emulated gaze point will always be the same.
+	if (!(EyeX->GetEmulationMode() == EEyeXEmulationMode::Enabled && EyeX->GetEmulationPointType() == EEyeXEmulationPoint::ViewportCenter))
 	{
-		// Too close to previous point: ignore.
-		return;
+		if (MinUpdateDistance > 0 &&
+			LastUsedGazePoint.bHasValue &&
+			DistanceInMM(GazePoint.Value, LastUsedGazePoint.Value, 1 / GetApproximatePixelsPerMillimeter()) < MinUpdateDistance)
+		{
+			// Too close to previous point: ignore.
+			return;
+		}
 	}
 
 	LastUsedGazePoint = GazePoint;
